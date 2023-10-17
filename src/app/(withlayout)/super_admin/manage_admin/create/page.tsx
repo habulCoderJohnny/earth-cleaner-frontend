@@ -29,7 +29,7 @@ export default function CreateAdmin() {
   };
 
   useEffect(() => {
-    if (isSuccess) toast.success("Admin Create succesfully", { id: "success" });
+    if (isSuccess) toast.success("Admin Create successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to create", { id: "err" });
