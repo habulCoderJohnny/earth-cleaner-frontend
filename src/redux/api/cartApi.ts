@@ -5,7 +5,7 @@ const CART_API = "/carts";
 const cartApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addCart: build.mutation({
-      query: (data: Record<string, any>) => ({
+      query: (data: Record<string, unknown>) => ({
         url: CART_API,
         method: "POST",
         body: data,
@@ -20,20 +20,12 @@ const cartApi = baseApi.injectEndpoints({
       }),
       providesTags: [ENUM_TAG_TYPE.cart],
     }),
-    getCart: build.query({
+    getCartsByServiceId: build.query({
       query: (id: string) => ({
-        url: `${CART_API}/${id}`,
+        url: `${CART_API}/service/${id}`,
         method: "GET",
       }),
       providesTags: [ENUM_TAG_TYPE.cart],
-    }),
-    updateCart: build.mutation({
-      query: ({ id, data }) => ({
-        url: `${CART_API}/${id}`,
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: [ENUM_TAG_TYPE.cart],
     }),
     deleteCart: build.mutation({
       query: (id: string) => ({
@@ -47,8 +39,7 @@ const cartApi = baseApi.injectEndpoints({
 
 export const {
   useGetCartsQuery,
-  useGetCartQuery,
+  useGetCartsByServiceIdQuery,
   useAddCartMutation,
-  useUpdateCartMutation,
   useDeleteCartMutation,
 } = cartApi;
