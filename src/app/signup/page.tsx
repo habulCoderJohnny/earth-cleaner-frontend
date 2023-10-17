@@ -12,6 +12,7 @@ type Inputs = {
   email: string;
   age: string;
   password: string;
+  confirmPassword: string;
   contactNo: string;
   address: string;
 };
@@ -25,18 +26,18 @@ export default function SignUp() {
     data.age = Number(data.age);
     const res = await signUp(data);
     //@ts-ignore
-    const accessToken = res.data.data.accessToken;
+    const accessToken = res.data?.data?.accessToken;
     storeUserInfo({ accessToken });
   };
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Signed In successfully", { id: "success" });
+      toast.success("Signup In successfully", { id: "success" });
       router.push("/");
     }
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
-    if (isError) toast.error("Failed to sign in", { id: "err" });
+    if (isError) toast.error("Failed to signup", { id: "err" });
   }, [isSuccess, isError, isLoading, router]);
 
   return (
@@ -110,6 +111,18 @@ export default function SignUp() {
                 className="input input-bordered"
                 required
                 {...register("password", { required: true })}
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                className="input input-bordered"
+                required
+                {...register("confirmPassword", { required: true })}
               />
             </div>
             <div className="form-control">
