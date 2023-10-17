@@ -1,61 +1,41 @@
 "use client";
 import Table from "@/components/ui/Table";
-import {
-  useDeleteCategoryMutation,
-  useGetCategoriesQuery,
-} from "@/redux/api/categoryApi";
-import Link from "next/link";
-import React, { useEffect } from "react";
-import toast from "react-hot-toast";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { useGetBookingsQuery } from "@/redux/api/bookingApi";
+import { getUserInfo } from "@/services/auth.services";
+import moment from "moment";
+import React from "react";
 
 export default function BookingHistory() {
-  const rowItems = ["", "Title", "CreatedAt", "Actions"];
+  const rowItems = ["", "Title", "Price", "Status", "Created At"];
 
-  const { data } = useGetCategoriesQuery({ page: 1, limit: 100 });
-  const [deleteCategory, { isLoading, isSuccess, isError }] =
-    useDeleteCategoryMutation();
+  const { data } = useGetBookingsQuery({ limit: 1000 });
 
-  const handleDelete = (id: string) => {
-    deleteCategory(id);
-  };
+  const tableData = data?.data?.map((data: any, i: number) => {
+    let badgeColor = "badge-primary";
 
-  useEffect(() => {
-    if (isSuccess)
-      toast.success("Category Delete successfully", { id: "success" });
-    if (isLoading)
-      toast.loading("Processing...", { id: "process", duration: 800 });
-    if (isError) toast.error("Failed to delete", { id: "err" });
-  }, [isSuccess, isError, isLoading]);
+    if (data?.status == "approved") badgeColor = "badge-secondary";
 
-  const tableData = data?.data?.map((data: any, i: number) => (
-    <tr key={data._id} className="hover">
-      <th>{i + 1}</th>
-      <td>{data.title}</td>
-      <td>{data.createdAt}</td>
-      <td>
+    if (data?.status == "rejected") badgeColor = "badge-error";
+
+    if (data?.status == "canceled") badgeColor = "badge-neutral";
+
+    return (
+      <tr key={data._id} className="hover">
+        <th>{i + 1}</th>
+        <td>{data?.service?.title}</td>
+        <td>{data?.service?.price}</td>
         <td>
-          <div className="flex gap-3">
-            <Link href={`manage_category/edit/${data._id}`}>
-              <button className="btn btn-sm">
-                <AiFillEdit className="text-blue-500 text-2xl" />
-              </button>
-            </Link>
-            <button
-              onClick={() => handleDelete(data._id)}
-              className="btn btn-sm"
-            >
-              <AiFillDelete className="text-red-600 text-2xl" />
-            </button>
-          </div>
+          <span className={`badge ${badgeColor} badge-sm`}>{data?.status}</span>
         </td>
-      </td>
-    </tr>
-  ));
+        <td>{moment(data?.createdAt).format("DD MMM YYYY")}</td>
+        <td></td>
+      </tr>
+    );
+  });
 
   return (
     <div>
-      <h2 className="text-3xl font-bold">Booking History Page</h2>
+      <h2 className="text-3xl font-bold">Manage Service Page</h2>
       <div className="mt-12">
         <div className="flex justify-between items-center mb-6">
           <input
@@ -64,7 +44,11 @@ export default function BookingHistory() {
             className="input input-bordered w-full max-w-xs"
           />
         </div>
-        <Table rowItems={rowItems} tableData={tableData} />
+        {tableData?.length ? (
+          <Table rowItems={rowItems} tableData={tableData} />
+        ) : (
+          <p className="mt-5 text-xl text-center">No Data</p>
+        )}
       </div>
     </div>
   );
