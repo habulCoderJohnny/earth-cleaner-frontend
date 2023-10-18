@@ -78,8 +78,9 @@ export default function CreateService() {
               placeholder="Select Status"
               {...register("status", { required: true })}
             >
-              <option value="available">Avaiable</option>
-              <option value="unavailable">Unavaiable</option>
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+              <option value="upcoming">Upcoming</option>
             </select>
           </div>
           <div className="form-control">
