@@ -28,6 +28,12 @@ export default function SideBarItems({ role }: { role: string }) {
       <li>
         <Link href={`/${role}/booking_history`}>Booking History</Link>
       </li>
+      <li>
+        <Link href={`/${role}/manage_booking`}>Manage Booking</Link>
+      </li>
+      <li>
+        <Link href={`/${role}/manage_content`}>Manage Content</Link>
+      </li>
     </>
   );
 
@@ -45,12 +51,15 @@ export default function SideBarItems({ role }: { role: string }) {
       <li>
         <Link href={`/${role}/manage_booking`}>Manage Booking</Link>
       </li>
+      <li>
+        <Link href={`/${role}/manage_content`}>Manage Content</Link>
+      </li>
     </>
   );
 
   if (role === ENUM_USER_ROLE.super_admin) return superAdminItems;
 
   if (role === ENUM_USER_ROLE.admin) return adminItems;
-
+  
   return userItems;
 }
