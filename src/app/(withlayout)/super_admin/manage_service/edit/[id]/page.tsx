@@ -61,7 +61,7 @@ export default function EditService({ params }: { params: any }) {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Service Update succesfully", { id: "success" });
+      toast.success("Service Update successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to update", { id: "err" });

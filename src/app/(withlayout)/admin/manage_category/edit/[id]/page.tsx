@@ -38,7 +38,7 @@ export default function EditCategory({ params }: { params: any }) {
   };
 
   useEffect(() => {
-    if (isSuccess) toast.success("Category Update succesfully", { id: "success" });
+    if (isSuccess) toast.success("Category Update successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to update", { id: "err" });

@@ -24,7 +24,7 @@ export default function CreateCategory() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Content Created succesfully", { id: "success" });
+      toast.success("Content Created successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to create", { id: "err" });

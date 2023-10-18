@@ -69,13 +69,13 @@ export default function ContentManagement() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Service Delete succesfully", { id: "success" });
+      toast.success("Service Delete successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to delete", { id: "err" });
 
     if (updateSucc)
-      toast.success("Service Delete succesfully", { id: "success" });
+      toast.success("Service Delete successfully", { id: "success" });
     if (updateLoad)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (updateErr) toast.error("Failed to delete", { id: "err" });

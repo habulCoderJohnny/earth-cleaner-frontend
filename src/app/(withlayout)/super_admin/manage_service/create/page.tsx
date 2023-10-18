@@ -34,7 +34,7 @@ export default function CreateService() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Service Create succesfully", { id: "success" });
+      toast.success("Service Create successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to create", { id: "err" });

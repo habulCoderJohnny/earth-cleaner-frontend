@@ -26,7 +26,7 @@ export default function ManageCategory() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Category Delete succesfully", { id: "success" });
+      toast.success("Category Delete successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to delete", { id: "err" });

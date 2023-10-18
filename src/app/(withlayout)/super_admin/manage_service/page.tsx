@@ -49,7 +49,7 @@ export default function ManageService() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Service Delete succesfully", { id: "success" });
+      toast.success("Service Delete successfully", { id: "success" });
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
     if (isError) toast.error("Failed to delete", { id: "err" });

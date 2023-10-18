@@ -14,7 +14,7 @@ export default function BookingHistory() {
 
   useEffect(() => {
     if (isSuccess)
-      toast.success("Update Service status succesfully", { id: "success" });
+      toast.success("Update Service status successfully", { id: "success" });
 
     if (isLoading)
       toast.loading("Processing...", { id: "process", duration: 800 });
