@@ -2,7 +2,7 @@
 import Table from "@/components/ui/Table";
 import { useDeleteServiceMutation } from "@/redux/api/serviceApi";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import toast from "react-hot-toast";
@@ -15,7 +15,11 @@ import {
 export default function ContentManagement() {
   const rowItems = ["", "Title", "Status", "Created At"];
 
-  const { data } = useGetContentsQuery({ page: 1, limit: 100 });
+  const [searchTerm, setSearchTerm] = useState("");
+  const query: Record<string, unknown> = { page: 1, limit: 100 };
+  query["searchTerm"] = searchTerm;
+  const { data } = useGetContentsQuery(query);
+
   const [deleteContent, { isLoading, isError, isSuccess }] =
     useDeleteContentMutation();
 
@@ -83,7 +87,7 @@ export default function ContentManagement() {
       <h2 className="text-3xl font-bold">Manage Service Page</h2>
       <div className="mt-12">
         <div className="flex justify-between items-center mb-6">
-          <input
+          <input onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"

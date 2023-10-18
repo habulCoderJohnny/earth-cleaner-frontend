@@ -3,13 +3,16 @@ import Table from "@/components/ui/Table";
 import { useGetBookingsQuery } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.services";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 
 export default function BookingHistory() {
   const rowItems = ["", "Title", "Price", "Status", "Created At"];
 
-  const { data } = useGetBookingsQuery({ limit: 1000 });
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const query: Record<string, unknown> = { page: 1, limit: 100 };
+  query["searchTerm"] = searchTerm;
+  const { data } = useGetBookingsQuery(query);
+  
   const tableData = data?.data?.map((data: any, i: number) => {
     let badgeColor = "badge-primary";
 
@@ -38,7 +41,7 @@ export default function BookingHistory() {
       <h2 className="text-3xl font-bold">Manage Service Page</h2>
       <div className="mt-12">
         <div className="flex justify-between items-center mb-6">
-          <input
+          <input onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"

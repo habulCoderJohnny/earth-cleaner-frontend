@@ -5,14 +5,18 @@ import {
   useGetCategoriesQuery,
 } from "@/redux/api/categoryApi";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 export default function ManageCategory() {
   const rowItems = ["", "Title", "CreatedAt", "Actions"];
 
-  const { data } = useGetCategoriesQuery({ page: 1, limit: 100 });
+  const [searchTerm, setSearchTerm] = useState("");
+  const query: Record<string, unknown> = { page: 1, limit: 100 };
+  query["searchTerm"] = searchTerm;
+  const { data } = useGetCategoriesQuery(query);
+
   const [deleteCategory, { isLoading, isSuccess, isError }] =
     useDeleteCategoryMutation();
 
@@ -58,7 +62,7 @@ export default function ManageCategory() {
       <h2 className="text-3xl font-bold">Manage Category Page</h2>
       <div className="mt-12">
         <div className="flex justify-between items-center mb-6">
-          <input
+          <input onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
