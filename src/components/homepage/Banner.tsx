@@ -10,10 +10,9 @@ export default function Banner() {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-lg">
-            <h1 className="mb-5 text-5xl font-bold">Welcome to earthCleaner</h1>
+            <h1 className="mb-5 text-5xl font-bold">We’ve got all your cleaning needs covered.</h1>
             <p className="mb-5">
-              We provide quality service to our customer to clean their home,
-              garden and offices. Ensuring quality is our first and foremost duty.
+            “We offer a wide range of cleaning services to meet your needs. Our team of professional cleaners is dedicated to providing high-quality, reliable service.
             </p>
             <button className="btn btn-primary">Clean Now</button>
           </div>
